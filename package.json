@@ -17,5 +17,15 @@
   "engines": {
     "node": "12.13.1",
     "npm": "*"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guderian2nd/CBTBot.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Guderian2nd/CBTBot/issues"
+  },
+  "homepage": "https://github.com/Guderian2nd/CBTBot#readme"
 }
