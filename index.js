@@ -12,6 +12,9 @@ Object.keys(botCommands).map(key => {
 
 global.ctflag = false;
 
+bot.on('ready', () => {
+  console.log('I am ready!');
+});
 function checkStates(message) {
   if (global.ctflag) {
     if (message.author.discriminator == '2163') {
