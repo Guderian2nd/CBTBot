@@ -3,12 +3,12 @@ module.exports = {
   description: 'CT write your damn sheet!',
   execute(msg, args) {
     if (msg.author.discriminator == '2163') {
-      msg.reply(':CTSheet:');
+      msg.reply(':CTSheet:, test');
       return;
     }
     if (typeof args == 'undefined') {
       if (global.ctflag) {
-        msg.reply(':CTSheet:');
+        msg.reply(':CTSheet:, test');
         //msg.channel.send(':CTSheet:');
       }
     } else if (args[0] == 'on') {
