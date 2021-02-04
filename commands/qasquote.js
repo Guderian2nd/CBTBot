@@ -11,7 +11,7 @@ module.exports = {
     } else {
       var an_adjective = sentencer.make('{{ an_adjective }}');
       var adjective = an_adjective.split(/ +/g);
-      msg.channel.send(`\"I once dated ${an_adjective} girl, so I hate ${adjective} people.\" - Qastiel`);
+      msg.channel.send(`\"I once dated ${an_adjective} girl, so I hate ${adjective[1]} people.\" - Qastiel`);
     }
   },
 };
