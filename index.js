@@ -6,25 +6,40 @@ const botCommands = require('./commands');
 
 const TOKEN = process.env.TOKEN;
 
+const globals = require('./globals.js');
+
 Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
 });
 
-global.ctflag = false;
+globals.ctflag = false;
 
 bot.on('ready', () => {
   console.log('I am ready!');
 });
 function checkStates(message) {
-  if (global.ctflag) {
-    if (message.author.discriminator == '2163') {
+  let flag = false;
+  if (globals.ctflag) {
+    if (message.author.discriminator == globals.ctdiscrim) {
       const command = 'ctsheet'
       console.info(`Called command: ${command}`);
       bot.commands.get(command).execute(message);
-      return true;
+      flag = true
     }
   }
-  return false;
+  if (message.author.discriminator == globals.guddiscrim) {
+    var date = new Date();
+    var hours = date.getUTCHours();
+    hours = (hours + 9) % 24;
+
+    if (2 <= hours && hours <= 7) {
+      const command = 'gudsleep'
+      console.info(`Called command: ${command}`);
+      bot.commands.get(command).execute(message);
+      flag = true
+    }
+  }
+  return flag;
 }
 
 bot.on('message', msg => {
