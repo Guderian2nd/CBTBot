@@ -20,7 +20,7 @@ bot.on('ready', () => {
 
   globals.ctflag = false;
   let tmp = new Date();
-  globals.catoday = (convertTZ(tmp, 'Central European Time')).getDate();
+  globals.catoday = (convertTZ(tmp, 'UTC+1')).getDate();
 });
 
 function checkStates(message) {
@@ -47,8 +47,8 @@ function checkStates(message) {
   }
   if (message.author.discriminator == globals.catodiscrim) {
     var tmp = new Date();
-    if (globals.catoday != (convertTZ(tmp, 'Central European Time')).getDate()) {
-      globals.catoday = (convertTZ(tmp, 'Central European Time')).getDate();
+    if (globals.catoday != (convertTZ(tmp, 'UTC+1')).getDate()) {
+      globals.catoday = (convertTZ(tmp, 'UTC+1')).getDate();
       const command = 'catopostturn';
       console.info(`Called command: ${command}`);
       bot.commands.get(command).execute(message);
