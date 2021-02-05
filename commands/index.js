@@ -3,5 +3,6 @@ module.exports = {
   Qasquote: require('./qasquote'),
   CTsheet: require('./ctsheet'),
   Help: require('./help'),
-  GudSleep: require('./gudsleep')
+  GudSleep: require('./gudsleep'),
+  CatoNoTurn: require('./catopostturn')
 };

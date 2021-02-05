@@ -11,17 +11,23 @@ const globals = require('./globals.js');
 Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
 });
-
-globals.ctflag = false;
+function convertTZ(date, tzString) {
+  return new Date((typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {timeZone: tzString}));   
+}
 
 bot.on('ready', () => {
   console.log('I am ready!');
+
+  globals.ctflag = false;
+  let tmp = new Date();
+  globals.catoday = (convertTZ(tmp, 'Central European Time')).getDate();
 });
+
 function checkStates(message) {
   let flag = false;
   if (globals.ctflag) {
     if (message.author.discriminator == globals.ctdiscrim) {
-      const command = 'ctsheet'
+      const command = 'ctsheet';
       console.info(`Called command: ${command}`);
       bot.commands.get(command).execute(message);
       flag = true
@@ -33,7 +39,17 @@ function checkStates(message) {
     hours = (hours + 9) % 24;
 
     if (2 <= hours && hours <= 7) {
-      const command = 'gudsleep'
+      const command = 'gudsleep';
+      console.info(`Called command: ${command}`);
+      bot.commands.get(command).execute(message);
+      flag = true
+    }
+  }
+  if (message.author.discriminator == globals.catodiscrim) {
+    var tmp = new Date();
+    if (globals.catoday != (convertTZ(tmp, 'Central European Time')).getDate()) {
+      globals.catoday = (convertTZ(tmp, 'Central European Time')).getDate();
+      const command = 'catopostturn';
       console.info(`Called command: ${command}`);
       bot.commands.get(command).execute(message);
       flag = true
