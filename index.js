@@ -19,8 +19,8 @@ bot.on('ready', () => {
   console.log('I am ready!');
 
   globals.ctflag = false;
-  let tmp = new Date();
-  globals.catoday = (convertTZ(tmp, 'Europe/Berlin')).getDate();
+  // let tmp = new Date();
+  globals.catoday = 0;
 });
 
 function checkStates(message) {
@@ -50,7 +50,7 @@ function checkStates(message) {
     if (globals.catoday != (convertTZ(tmp, 'Europe/Berlin')).getDate()) {
       globals.catoday = (convertTZ(tmp, 'Europe/Berlin')).getDate();
       const command = 'catopostturn';
-      console.info(`Called command: ${command}`);
+      console.info(`Called command: ${command}, date = ${globals.catoday}`);
       bot.commands.get(command).execute(message);
       flag = true
     }
