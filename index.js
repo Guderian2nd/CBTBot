@@ -61,7 +61,7 @@ function checkStates(message) {
   var now = new Date();
   if (now.getTime() - globals.tfacounter.getTime() > 1000 ) {
     for (var keyword in globals.tfakeywords) {
-      if (message.content.contains(keyword)) {
+      if (message.content.includes(keyword)) {
         const command = 'tfaclock';
         console.info(`Called command: ${command}`);
         bot.commands.get(command).execute(message, true);
