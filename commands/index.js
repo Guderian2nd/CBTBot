@@ -4,5 +4,6 @@ module.exports = {
   CTsheet: require('./ctsheet'),
   Help: require('./help'),
   GudSleep: require('./gudsleep'),
-  CatoNoTurn: require('./catopostturn')
+  CatoNoTurn: require('./catopostturn'),
+  TFACounter: require('./tfaclock')
 };

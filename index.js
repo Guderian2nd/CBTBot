@@ -21,6 +21,8 @@ bot.on('ready', () => {
   globals.ctflag = false;
   // let tmp = new Date();
   globals.catoday = 0;
+
+  globals.tfacounter = new Date();
 });
 
 function checkStates(message) {
@@ -53,6 +55,18 @@ function checkStates(message) {
       console.info(`Called command: ${command}, date = ${globals.catoday}`);
       bot.commands.get(command).execute(message);
       flag = true
+    }
+  }
+
+  var now = new Date();
+  if (now.getTime() - globals.tfacounter.getTime() > 1000 ) {
+    for (var keyword in globals.tfakeywords) {
+      if (message.content.contains(keyword)) {
+        const command = 'tfaclock';
+        console.info(`Called command: ${command}`);
+        bot.commands.get(command).execute(message, true);
+        flag = true
+      }
     }
   }
   return flag;
