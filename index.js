@@ -60,7 +60,7 @@ function checkStates(message) {
 
   var now = new Date();
   if (now.getTime() - globals.tfacounter.getTime() > 1000 ) {
-    for (var keyword in globals.tfakeywords) {
+    for (var keyword of globals.tfakeywords) {
       console.info(`tfakeyword checking for : ${keyword}`);
 
       if (message.content.includes(keyword)) {
