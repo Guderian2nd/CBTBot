@@ -66,7 +66,8 @@ function checkStates(message) {
       if (message.content.includes(keyword)) {
         const command = 'tfaclock';
         console.info(`Called command: ${command}`);
-        bot.commands.get(command).execute(message, true);
+        const args = ['reset'];
+        bot.commands.get(command).execute(message, args);
         flag = true
       }
     }

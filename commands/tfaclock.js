@@ -7,8 +7,9 @@ module.exports = {
     var date = new Date();
     var counter = date.getTime() - globals.tfacounter.getTime();
     counter = counter / (1000 * 3600 * 24);
+    counter = Math.floor(counter);
 
-    if (args[0] == true) {
+    if (args[0] == 'reset') {
       msg.channel.send('CBT complained about TFA again! Resetting the clock...');
       globals.tfacounter = date;
     }
