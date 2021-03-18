@@ -57,7 +57,7 @@ function checkStates(message) {
       flag = true
     }
   }
-  if (!(msg.author.bot)) {
+  if (!(message.author.bot)) {
     var now = new Date();
     if (now.getTime() - globals.tfacounter.getTime() > 1000 * 3600) {
       for (var keyword of globals.tfakeywords) {
@@ -69,6 +69,7 @@ function checkStates(message) {
           const args = ['reset'];
           bot.commands.get(command).execute(message, args);
           flag = true
+          break;
         }
       }
     }
