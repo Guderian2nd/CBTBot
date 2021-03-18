@@ -1,4 +1,4 @@
-require('dotenv').config(); 
+require('dotenv').config();
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
@@ -12,7 +12,7 @@ Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
 });
 function convertTZ(date, tzString) {
-  return new Date((typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {timeZone: tzString}));   
+  return new Date((typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', { timeZone: tzString }));
 }
 
 bot.on('ready', () => {
@@ -57,21 +57,23 @@ function checkStates(message) {
       flag = true
     }
   }
+  if (!(msg.author.bot)) {
+    var now = new Date();
+    if (now.getTime() - globals.tfacounter.getTime() > 1000 * 3600) {
+      for (var keyword of globals.tfakeywords) {
+        // console.info(`tfakeyword checking for : ${keyword}`);
 
-  var now = new Date();
-  if (now.getTime() - globals.tfacounter.getTime() > 1000 * 3600 ) {
-    for (var keyword of globals.tfakeywords) {
-      // console.info(`tfakeyword checking for : ${keyword}`);
-
-      if (message.content.includes(keyword)) {
-        const command = 'tfaclock';
-        console.info(`Called command: ${command}`);
-        const args = ['reset'];
-        bot.commands.get(command).execute(message, args);
-        flag = true
+        if (message.content.includes(keyword)) {
+          const command = 'tfaclock';
+          console.info(`Called command: ${command}`);
+          const args = ['reset'];
+          bot.commands.get(command).execute(message, args);
+          flag = true
+        }
       }
     }
   }
+
   return flag;
 }
 
