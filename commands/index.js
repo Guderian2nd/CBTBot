@@ -5,5 +5,6 @@ module.exports = {
   Help: require('./help'),
   GudSleep: require('./gudsleep'),
   CatoNoTurn: require('./catopostturn'),
-  TFACounter: require('./tfaclock')
+  TFACounter: require('./tfaclock'),
+  StevDraw: require('./stevdraw')
 };

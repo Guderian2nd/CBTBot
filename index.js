@@ -23,6 +23,13 @@ bot.on('ready', () => {
   globals.catoday = 0;
 
   globals.tfacounter = new Date();
+
+  globals.stevuser = bot.users.cache.find(user => user.discriminator === globals.stevdiscrim);
+  globals.drawchannel = bot.channels.cache.get('923637829823791104');
+
+  const command = 'stevdraw';
+  console.info(`Called command: ${command}`);
+  bot.commands.get(command).execute(bot);
 });
 
 function checkStates(message) {
