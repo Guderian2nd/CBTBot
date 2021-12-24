@@ -16,7 +16,7 @@ module.exports = {
         console.log('no existing interval');
         client.stevinterval = setInterval( () =>
         {
-          const thedate = new Date();
+          let thedate = new Date();
           thedate = convertTZ(thedate, 'America/Los_Angeles');
           if ( thedate.getHours() === 20 && thedate.getMinutes() === 0)
           {
