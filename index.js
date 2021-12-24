@@ -24,8 +24,8 @@ bot.on('ready', () => {
 
   globals.tfacounter = new Date();
 
-  globals.stevuser = bot.users.cache.find(user => user.discriminator === globals.stevdiscrim);
-  globals.drawchannel = bot.channels.cache.get('923637829823791104');
+  globals.stevuser = bot.users.find(user => user.discriminator === globals.stevdiscrim);
+  globals.drawchannel = bot.channels.get('923637829823791104');
 
   const command = 'stevdraw';
   console.info(`Called command: ${command}`);
