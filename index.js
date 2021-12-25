@@ -27,7 +27,6 @@ bot.on('ready', () => {
   globals.stevuser = bot.users.get(globals.stevid);
   globals.drawchannel = bot.channels.get('923637829823791104');
   globals.stevdrawflag = false;
-  bot.stevinterval = null;
 
   const command = 'stevdraw';
   console.info(`Called command: ${command}`);
