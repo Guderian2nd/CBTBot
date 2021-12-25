@@ -13,57 +13,58 @@ function getRandomInt(min, max) {
 module.exports = {
   name: 'stevdraw',
   description: 'Tells stev to draw something at 8PM PST. Automatically called at start of day.',
-  execute(client) {
-    const tmp = client.user.discriminator;
-    if (tmp === '8715') 
+  execute(client, args) {
+    if (typeof args == 'undefined')
     {
-      console.log(`stev client is ready`);
-      if (typeof client.stevinterval == 'undefined')
+      const tmp = client.user.discriminator;
+      if (tmp === '8715') 
       {
-        console.log('no existing interval');
-        client.stevinterval = setInterval( () =>
+        console.log(`stev client is ready`);
+        if (typeof client.stevinterval == 'undefined')
         {
-          let thedate = new Date();
-          thedate = convertTZ(thedate, 'America/Los_Angeles');
-          if ( thedate.getHours() === 20 && thedate.getMinutes() === 0)
+          console.log('no existing interval');
+          client.stevinterval = setInterval( () =>
           {
-            if (globals.stevdrawflag)
+            let thedate = new Date();
+            thedate = convertTZ(thedate, 'America/Los_Angeles');
+            if ( thedate.getHours() === 20 && thedate.getMinutes() === 0)
             {
-              globals.drawchannel.send(`${globals.stevuser}, okay i see that u posted something today with an attached image which may or may not be something you drew but i'm still gonna tell u to draw`);
-            }
-            else 
-            {
-              const randnum = getRandomInt(0,3);
-              switch (randnum)
+              if (globals.stevdrawflag)
               {
-                case 0 :
-                  globals.drawchannel.send(`${globals.stevuser}, if you don't draw something reaps will cuck your non-existent gf`);
-                  break;
-                case 1 :
-                  globals.drawchannel.send(`${globals.stevuser}, ct could probably write more sheets in the time in takes u to draw something`);
-                  break;
-                case 2 :
-                  globals.drawchannel.send(`${globals.stevuser}, at this rate cato will have the next boco update ready before you start drawing`);
-                  break;
-                default :
-                  globals.drawchannel.send(`${globals.stevuser}, go draw something u little bitch`);
+                globals.drawchannel.send(`${globals.stevuser}, okay i see that u posted something today with an attached image which may or may not be something you drew but i'm still gonna tell u to draw`);
               }
+              else 
+              {
+                const randnum = getRandomInt(0,3);
+                switch (randnum)
+                {
+                  case 0 :
+                    globals.drawchannel.send(`${globals.stevuser}, if you don't draw something reaps will cuck your non-existent gf`);
+                    break;
+                  case 1 :
+                    globals.drawchannel.send(`${globals.stevuser}, ct could probably write more sheets in the time in takes u to draw something`);
+                    break;
+                  case 2 :
+                    globals.drawchannel.send(`${globals.stevuser}, at this rate cato will have the next boco update ready before you start drawing`);
+                    break;
+                  default :
+                    globals.drawchannel.send(`${globals.stevuser}, go draw something u little bitch`);
+                }
+              }
+              clearInterval(client.stevinterval);
             }
-            clearInterval(client.stevinterval);
-          }
-          console.log(`stev time check : ${thedate}`);
-        }, 60000) // check every minute
+            console.log(`stev time check : ${thedate}`);
+          }, 60000) // check every minute
+        }
       }
     }
-  },
-  execute(msg, args) {
-    if (typeof args != 'undefined')
+    else
     {
-      if (msg.author.id === globals.stevid)
+      if (client.author.id === globals.stevid)
       {
-        if (msg.channelId === globals.drawchannel.id)
+        if (client.channelId === globals.drawchannel.id)
         {
-          if (msg.attachments.size > 0) 
+          if (client.attachments.size > 0) 
           {
             globals.stevdrawflag = true;
           }
