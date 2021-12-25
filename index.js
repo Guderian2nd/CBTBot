@@ -24,8 +24,9 @@ bot.on('ready', () => {
 
   globals.tfacounter = new Date();
 
-  globals.stevuser = bot.users.find(user => user.discriminator === globals.stevdiscrim);
+  globals.stevuser = bot.users.get(globals.stevid);
   globals.drawchannel = bot.channels.get('923637829823791104');
+  globals.stevdrawflag = false;
 
   const command = 'stevdraw';
   console.info(`Called command: ${command}`);
@@ -63,6 +64,12 @@ function checkStates(message) {
       bot.commands.get(command).execute(message);
       flag = true
     }
+  }
+  if (message.author.id == globals.stevid) {
+      const command = 'stevdraw';
+      const args = ['dummy'];
+      console.info(`Called command: ${command}, args = ${args}`);
+      bot.commands.get(command).execute(message, args);
   }
   if (!(message.author.bot)) {
     var now = new Date();
