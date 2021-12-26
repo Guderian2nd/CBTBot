@@ -48,7 +48,7 @@ module.exports = {
               }
               else 
               {
-                const randnum = getRandomInt(0,4);
+                const randnum = getRandomInt(0,5);
                 switch (randnum)
                 {
                   case 0 :
@@ -61,6 +61,9 @@ module.exports = {
                     globals.drawchannel.send(`<@${globals.stevid}>, at this rate cato will have the next boco update ready before you start drawing`);
                     break;
                   case 3 :
+                    globals.drawchannel.send(`<@${globals.stevid}>, your inability to draw is only matched by terran's inability to avoid being racist`);
+                    break;
+                  case 4 :
                     const qasgfnum = getRandomInt(2,5);
                     globals.drawchannel.send(`<@${globals.stevid}>, since you last drew something qas has dated and turned ${qasgfnum} women into lesbians.`);
                     let cnt = 0;
