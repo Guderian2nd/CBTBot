@@ -24,7 +24,6 @@ bot.on('ready', () => {
 
   globals.tfacounter = new Date();
 
-  globals.stevuser = bot.users.get(globals.stevid);
   globals.drawchannel = bot.channels.get('923637829823791104');
   globals.stevdrawflag = false;
 

@@ -1,12 +1,25 @@
 const globals = require('../globals.js');
-function convertTZ(date, tzString) {
+function convertTZ(date, tzString) 
+{
   return new Date((typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', { timeZone: tzString }));
 }
 
-function getRandomInt(min, max) {
+function getRandomInt(min, max) 
+{
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function qasQuoteCommand(client) 
+{
+  const messagePromise = globals.drawchannel.send(`$qasquote`)
+  messagePromise.then(message => { 
+    const command = 'qasquote';
+    console.info(`Called command: ${command}`);
+    client.commands.get(command).execute(message);
+    return 'qasquote command success'; })
+  .catch(err => { console.log(err); } );
 }
 
 
@@ -31,24 +44,39 @@ module.exports = {
             {
               if (globals.stevdrawflag)
               {
-                globals.drawchannel.send(`${globals.stevuser}, okay i see that u posted something today with an attached image which may or may not be something you drew but i'm still gonna tell u to draw`);
+                globals.drawchannel.send(`<@${globals.stevid}>, okay i see that u posted something today with an attached image which may or may not be something you drew but i'm still gonna tell u to draw`);
               }
               else 
               {
-                const randnum = getRandomInt(0,3);
+                const randnum = getRandomInt(0,4);
                 switch (randnum)
                 {
                   case 0 :
-                    globals.drawchannel.send(`${globals.stevuser}, if you don't draw something reaps will cuck your non-existent gf`);
+                    globals.drawchannel.send(`<@${globals.stevid}>, if you don't draw something reaps will cuck your non-existent gf`);
                     break;
                   case 1 :
-                    globals.drawchannel.send(`${globals.stevuser}, ct could probably write more sheets in the time in takes u to draw something`);
+                    globals.drawchannel.send(`<@${globals.stevid}>, ct can write sheets faster than you can draw`);
                     break;
                   case 2 :
-                    globals.drawchannel.send(`${globals.stevuser}, at this rate cato will have the next boco update ready before you start drawing`);
+                    globals.drawchannel.send(`<@${globals.stevid}>, at this rate cato will have the next boco update ready before you start drawing`);
+                    break;
+                  case 3 :
+                    const qasgfnum = getRandomInt(2,5);
+                    globals.drawchannel.send(`<@${globals.stevid}>, since you last drew something qas has dated and turned ${qasgfnum} women into lesbians.`);
+                    let cnt = 0;
+                    setTimeout( function qasTimeout()
+                      {
+                        if (cnt < qasgfnum)
+                        {
+                          qasQuoteCommand(client);
+                          cnt++;
+                          setTimeout(qasTimeout,400);
+                        }
+                      }
+                    , 400);
                     break;
                   default :
-                    globals.drawchannel.send(`${globals.stevuser}, go draw something u little bitch`);
+                    globals.drawchannel.send(`<@${globals.stevid}>, go draw something u little bitch`);
                 }
               }
               clearInterval(client.stevinterval);
